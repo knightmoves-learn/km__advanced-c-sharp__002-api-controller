@@ -18,14 +18,14 @@ public class ExistenceTests
     {
         string controllerDirectoryPath = @"../../../../StockPriceApi/Controllers";
         //output.WriteLine(Directory.Exists(projectDirectoryPath).ToString());
-        Assert.True(Directory.Exists(controllerDirectoryPath), "The file directory \"Controllers\" does not exist at the root of the StockPriceAPI project");
+        Assert.True(Directory.Exists(controllerDirectoryPath), "The file directory \"Controllers\" does not exist at the root of the StockPriceApi project");
     }
 
     [Fact]
     public void DoesStockPriceControllerExist()
     {
         string controllerFilePath = @"../../../../StockPriceApi/Controllers/StockPriceController.cs";
-        Assert.True(File.Exists(controllerFilePath), "The file \"StockPriceController\" does not exist in the Controller directory at the root of the StockPriceAPI project");
+        Assert.True(File.Exists(controllerFilePath), "The file \"StockPriceController\" does not exist in the Controller directory at the root of the StockPriceApi project");
     }
 }
 
@@ -74,7 +74,8 @@ public class ContentTests
         Assert.True(httpGetAttributeExists && correctGetMethodExists, "StockPriceController.cs does not contain the correct \"HTTPGet\" attribute or does not contain the correct \"Get()\" method");
     }
 
-    public void DoesStockPriceControllerContainOriginalLogicFromProjectCS()
+    [Fact]
+    public void DoesStockPriceControllerContainOriginalLogicFromProgram()
     {
         bool selectIntoPricesExists = fileContent.Contains("var prices = Enumerable.Range(0, 9).Select(index =>");
         bool newStockPricesExists = fileContent.Contains("new StockPrices");
@@ -84,6 +85,42 @@ public class ContentTests
         bool correctLogicFromProgramCS = selectIntoPricesExists && newStockPricesExists && tickersIndexExists && toArrayExists && returnPricesExists;
 
         Assert.True(correctLogicFromProgramCS, "StockPriceController.cs does not contain the original logic from \"Program.cs\" in the HTTP Get method");
+    }
+}
 
+public class ProgramTests
+{
+    string fileContent;
+
+    public ProgramTests()
+    {
+        fileContent = File.ReadAllText(@"../../../../StockPriceApi/Program.cs");
+    }
+
+    [Fact]
+    public void DoesProgramNoLongerHaveStockTickersAndPricesArrays()
+    {
+        bool tickersExist = fileContent.Contains("string[] stockTickers = { \"AAPL\", \"GOOGL\", \"MSFT\", \"AMZN\", \"META\", \"TSLA\", \"NVDA\", \"JPM\", \"WMT\", \"KO\" };");
+        bool pricesExist = fileContent.Contains("decimal[] stockPrices = { 173.50m, 147.23m, 401.89m, 177.23m, 495.27m, 185.10m, 817.49m, 146.75m, 59.93m, 60.45m };");
+
+        Assert.True(!tickersExist && !pricesExist, "Program.cs still contains definititions for the string arrays \"stockTickers\" and \"stockPrices\"");
+    }
+
+    [Fact]
+    public void DoesProgramNoLongerHaveStockPricesGetRoute()
+    {
+        bool programGetExists = fileContent.Contains("app.MapGet(\"/StockPrices\", () =>");
+
+        Assert.True(!programGetExists, "Program.cs still contains a definition for the /StockPrices HTTP Get Route");
+    }
+
+    [Fact]
+    public void DoesProgramHaveCodeToAddAndMapControllers()
+    {
+        bool addControllersExists = fileContent.Contains("builder.Services.AddControllers();");
+        bool mapControllersExists = fileContent.Contains("app.MapControllers();");
+
+
+        Assert.True(addControllersExists && mapControllersExists, "Program.cs does not contains correct code to add and map controllers to the API");
     }
 }

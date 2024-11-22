@@ -3,7 +3,7 @@
       {
         "name": "xunit tests",
         "setup": "",
-        "run": "DOTNET_CLI_HOME=/home/runner dotnet test ./TestsProj --logger \"console;verbosity=detailed\"",
+        "run": "DOTNET_CLI_HOME=/home/runner dotnet test ./TestsProj",
         "input": "",
         "output": "",
         "comparison": "included",
