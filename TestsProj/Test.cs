@@ -39,6 +39,12 @@ public class ContentTests
     }
 
     [Fact]
+    public void DoesStockPriceControllerHaveNamespaceStockPriceApi()
+    {
+        Assert.True(fileContent.Contains("namespace StockPriceApi"), "StockPriceController.cs does not contain \"namespace StockPriceApi\"");
+    }
+
+    [Fact]
     public void DoesCorrectAPIAttributeExistInStockPriceController()
     {
         Assert.True(fileContent.Contains("[ApiController]"), "StockPriceController.cs is missing the APIController attribute");
