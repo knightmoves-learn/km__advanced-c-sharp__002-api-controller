@@ -16,16 +16,16 @@ public class ExistenceTests
     [Fact]
     public void DoesControllersDirectoryExist()
     {
-        string controllerDirectoryPath = @"../../../../StockPriceTracker/Controllers";
+        string controllerDirectoryPath = @"../../../../StockPriceApi/Controllers";
         //output.WriteLine(Directory.Exists(projectDirectoryPath).ToString());
-        Assert.True(Directory.Exists(controllerDirectoryPath), "The file directory \"Controllers\" does not exist at the root of the StockPriceTracker project");
+        Assert.True(Directory.Exists(controllerDirectoryPath), "The file directory \"Controllers\" does not exist at the root of the StockPriceApi project");
     }
 
     [Fact]
     public void DoesStockPriceControllerExist()
     {
-        string controllerFilePath = @"../../../../StockPriceTracker/Controllers/StockPriceController.cs";
-        Assert.True(File.Exists(controllerFilePath), "The file \"StockPriceController\" does not exist in the Controller directory at the root of the StockPriceTracker project");
+        string controllerFilePath = @"../../../../StockPriceApi/Controllers/StockPriceController.cs";
+        Assert.True(File.Exists(controllerFilePath), "The file \"StockPriceController\" does not exist in the Controller directory at the root of the StockPriceApi project");
     }
 }
 
@@ -35,13 +35,13 @@ public class ContentTests
 
     public ContentTests()
     {
-        fileContent = File.ReadAllText(@"../../../../StockPriceTracker/Controllers/StockPriceController.cs");
+        fileContent = File.ReadAllText(@"../../../../StockPriceApi/Controllers/StockPriceController.cs");
     }
 
     [Fact]
-    public void DoesStockPriceControllerHaveNamespaceStockPriceTracker()
+    public void DoesStockPriceControllerHaveNamespaceStockPriceApi()
     {
-        Assert.True(fileContent.Contains("namespace StockPriceTracker"), "StockPriceController.cs does not contain \"namespace StockPriceTracker\"");
+        Assert.True(fileContent.Contains("namespace StockPriceApi"), "StockPriceController.cs does not contain \"namespace StockPriceApi\"");
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class ProgramTests
 
     public ProgramTests()
     {
-        fileContent = File.ReadAllText(@"../../../../StockPriceTracker/Program.cs");
+        fileContent = File.ReadAllText(@"../../../../StockPriceApi/Program.cs");
     }
 
     [Fact]
