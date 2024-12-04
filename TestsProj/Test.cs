@@ -16,16 +16,16 @@ public class ExistenceTests
     [Fact]
     public void DoesControllersDirectoryExist()
     {
-        string controllerDirectoryPath = @"../../../../StockPriceApi/Controllers";
+        string controllerDirectoryPath = @"../../../../StockPriceTracker/Controllers";
         //output.WriteLine(Directory.Exists(projectDirectoryPath).ToString());
-        Assert.True(Directory.Exists(controllerDirectoryPath), "The file directory \"Controllers\" does not exist at the root of the StockPriceApi project");
+        Assert.True(Directory.Exists(controllerDirectoryPath), "The file directory \"Controllers\" does not exist at the root of the StockPriceTracker project");
     }
 
     [Fact]
     public void DoesStockPriceControllerExist()
     {
-        string controllerFilePath = @"../../../../StockPriceApi/Controllers/StockPriceController.cs";
-        Assert.True(File.Exists(controllerFilePath), "The file \"StockPriceController\" does not exist in the Controller directory at the root of the StockPriceApi project");
+        string controllerFilePath = @"../../../../StockPriceTracker/Controllers/StockPriceController.cs";
+        Assert.True(File.Exists(controllerFilePath), "The file \"StockPriceController\" does not exist in the Controller directory at the root of the StockPriceTracker project");
     }
 }
 
@@ -35,13 +35,13 @@ public class ContentTests
 
     public ContentTests()
     {
-        fileContent = File.ReadAllText(@"../../../../StockPriceApi/Controllers/StockPriceController.cs");
+        fileContent = File.ReadAllText(@"../../../../StockPriceTracker/Controllers/StockPriceController.cs");
     }
 
     [Fact]
-    public void DoesStockPriceControllerHaveNamespaceStockPriceApi()
+    public void DoesStockPriceControllerHaveNamespaceStockPriceTracker()
     {
-        Assert.True(fileContent.Contains("namespace StockPriceApi"), "StockPriceController.cs does not contain \"namespace StockPriceApi\"");
+        Assert.True(fileContent.Contains("namespace StockPriceTracker"), "StockPriceController.cs does not contain \"namespace StockPriceTracker\"");
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class ProgramTests
 
     public ProgramTests()
     {
-        fileContent = File.ReadAllText(@"../../../../StockPriceApi/Program.cs");
+        fileContent = File.ReadAllText(@"../../../../StockPriceTracker/Program.cs");
     }
 
     [Fact]
