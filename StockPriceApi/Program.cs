@@ -1,8 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+
 var app = builder.Build();
 app.MapControllers();
 
 app.Run();
 
-record StockPrices(string stockTicker, decimal stockPrice);
+// record StockPrices(string stockTicker, decimal stockPrice);
