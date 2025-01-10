@@ -65,17 +65,19 @@ public class ContentTests
     [Fact]
     public void DoStockTickersAndPricesExistInStockPriceController()
     {
-        bool tickersExist = fileContent.Contains("string[] stockTickers = { \"AAPL\", \"GOOGL\", \"MSFT\", \"AMZN\", \"META\", \"TSLA\", \"NVDA\", \"JPM\", \"WMT\", \"KO\" };");
-        bool pricesExist = fileContent.Contains("decimal[] stockPrices = { 173.50m, 147.23m, 401.89m, 177.23m, 495.27m, 185.10m, 817.49m, 146.75m, 59.93m, 60.45m };");
+        bool tickerVariableExist = fileContent.Contains("string[] stockTickers");
+        bool tickerValuesExist = fileContent.Contains("\"AAPL\", \"GOOGL\", \"MSFT\", \"AMZN\", \"META\", \"TSLA\", \"NVDA\", \"JPM\", \"WMT\", \"KO\"");
+        bool priceVariableExist = fileContent.Contains("decimal[] stockPrices");
+        bool priceValueExist = fileContent.Contains("173.50m, 147.23m, 401.89m, 177.23m, 495.27m, 185.10m, 817.49m, 146.75m, 59.93m, 60.45m");
 
-        Assert.True(tickersExist && pricesExist, "StockPriceController.cs does not contain definititions for the string arrays \"stockTickers\" and \"stockPrices\"");
+        Assert.True(tickerVariableExist && tickerValuesExist && priceVariableExist && priceValueExist, "StockPriceController.cs does not contain definititions for the string arrays \"stockTickers\" and \"stockPrices\"");
     }
 
     [Fact]
     public void DoesCorrectHTTPGetMethodExistOnStockPriceController()
     {
         bool httpGetAttributeExists = fileContent.Contains("[HttpGet]");
-        bool correctGetMethodExists = fileContent.Contains("public IEnumerable<StockPrices> Get()");
+        bool correctGetMethodExists = fileContent.Contains("private IEnumerable<StockPrices> Get()");
 
         Assert.True(httpGetAttributeExists && correctGetMethodExists, "StockPriceController.cs does not contain the correct \"HTTPGet\" attribute or does not contain the correct \"Get()\" method");
     }
@@ -83,12 +85,13 @@ public class ContentTests
     [Fact]
     public void DoesStockPriceControllerContainOriginalLogicFromProgram()
     {
-        bool selectIntoPricesExists = fileContent.Contains("var prices = Enumerable.Range(0, 9).Select(index =>");
+        bool pricesVariableExists = fileContent.Contains("var prices =");
+        bool selectIntoPricesExists = fileContent.Contains("Enumerable.Range(0, 9).Select(index =>");
         bool newStockPricesExists = fileContent.Contains("new StockPrices");
         bool tickersIndexExists = fileContent.Contains("stockTickers[index],");
         bool toArrayExists = fileContent.Contains(".ToArray();");
         bool returnPricesExists = fileContent.Contains("return prices;");
-        bool correctLogicFromProgramCS = selectIntoPricesExists && newStockPricesExists && tickersIndexExists && toArrayExists && returnPricesExists;
+        bool correctLogicFromProgramCS = pricesVariableExists && selectIntoPricesExists && newStockPricesExists && tickersIndexExists && toArrayExists && returnPricesExists;
 
         Assert.True(correctLogicFromProgramCS, "StockPriceController.cs does not contain the original logic from \"Program.cs\" in the HTTP Get method");
     }

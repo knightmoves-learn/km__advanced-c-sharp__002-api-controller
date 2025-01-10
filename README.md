@@ -23,7 +23,7 @@ The `StockPriceApi` project...
 - Should have a `public class` named "StockPriceController" which implements the "ControllerBase" class.
 - Should have attributes on the "StockPriceController" class that establish the class as an "ApiController", and establish a route of `[controller]` (or "StockPrice").
 - Should contain the code from `StockPriceApi/Program.cs` which create the string array "stockTickers", and the decimal array "stockPrices" with the same initial values.
-- Should contain a `public` method which returns `IEnumerable<StockPrices>` named "Get" and takes no arguments
+- Should contain a `private` method which returns `IEnumerable<StockPrices>` named "Get" and takes no arguments
 - The `Get()` method should have an attribute establishing it as an "HTTPGet" route.
 - The `Get()` method should contain the SAME logic as the `app.MapGet("/StockPrices")` in `StockPriceApi/Program.cs`
 
