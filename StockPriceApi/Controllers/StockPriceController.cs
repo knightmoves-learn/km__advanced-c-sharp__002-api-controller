@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace StockPriceApi.Controllers
 {
     [ApiController]
-    [Route("")]
+    [Route("[controller]")]
     public class StockPriceController : ControllerBase
     {
         private string[] stockTickers = new[]
