@@ -74,6 +74,14 @@ public class ContentTests
     }
 
     [Fact]
+    public void DoesPublicRecordStockPriceExistInStockPriceController()
+    {
+        bool stockPricesExists = fileContent.Contains("public record StockPrices(string stockTicker, decimal stockPrice);");
+
+        Assert.True(stockPricesExists, "StockPriceController.cs does not contain definititions for the public record \"StockPrices\"");
+    }
+
+    [Fact]
     public void DoesCorrectHTTPGetMethodExistOnStockPriceController()
     {
         bool httpGetAttributeExists = fileContent.Contains("[HttpGet]");
